@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use App\Models\Post;
 use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
@@ -104,13 +104,16 @@ class PostsController extends Controller
             'body' => $request->body,
         ]);
 
-        \DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
+        DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
 
-        foreach ($request->tags as $tag_id) {
-            \DB::table('tag_post')->insert([
-                'tag_id' => $tag_id,
-                'post_id' => $post->id
-            ]);
+        foreach ($request->tags as $tag) {
+            if(isset($tag))
+            {
+                DB::table('tag_post')->insert([
+                    'tag_id' => $tag,
+                    'post_id' => $post->id
+                ]);
+            }
         }
 
         return redirect('posts');
@@ -128,7 +131,7 @@ class PostsController extends Controller
 
         $post->delete();
 
-        \DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
+        DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
 
         return redirect('posts');
     }
