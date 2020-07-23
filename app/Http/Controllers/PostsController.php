@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
 
 class PostsController extends Controller
 {
@@ -19,7 +20,7 @@ class PostsController extends Controller
      */
     public function listar()
     {
-        $posts = \App\Post::all();
+        $posts = Post::all();
 
         return view('posts.index', ['posts' => $posts]);
     }
@@ -47,12 +48,12 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
 
-        \App\Post::create([
+        Post::create([
             'title' => $request->title,
             'body' => $request->body,
         ]);
 
-        $post = \App\Post::where('title', $request->title)->get();
+        $post = Post::where('title', $request->title)->get();
 
         foreach ($request->tags as $tag) {
             \DB::table('tag_post')->insert([
@@ -72,7 +73,7 @@ class PostsController extends Controller
      */
     public function editar($id)
     {
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         return view('posts.edit', ['post' => $post]);
     }
@@ -91,7 +92,7 @@ class PostsController extends Controller
             'body' => 'required'
         ]);
 
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         $post->update([
             'title' => $request->title,
@@ -118,7 +119,7 @@ class PostsController extends Controller
      */
     public function deletar($id)
     {
-        $post = \App\Post::find($id);
+        $post = Post::find($id);
 
         $post->delete();
 
