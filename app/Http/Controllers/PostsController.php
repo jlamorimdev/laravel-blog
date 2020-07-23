@@ -45,15 +45,26 @@ class PostsController extends Controller
      */
     public function salvar(Request $request)
     {   
+        $nomearquivo = '';
+        
         $this->validate($request, [
             'title' => 'required',
-            'body' => 'required'
+            'body' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        if($request->hasFile('image')){
+            $imagem = $request->file('image');
+            $nomearquivo = time().".".$imagem->getClientOriginalExtension();
+            $request->file('image')->move(public_path('./img/posts/'), $nomearquivo);
+        }
+
 
         Post::create([
             'title' => $request->title,
             'body' => $request->body,
-            'author' => Auth::user()->name
+            'image' => $nomearquivo,
+            'author' => Auth::user()->name,
             
         ]);
 
@@ -101,10 +112,18 @@ class PostsController extends Controller
         ]);
 
         $post = Post::find($id);
+        $nomearquivo = $post->image;
+
+        if($request->hasFile('image')){
+            $imagem = $request->file('image');
+            $nomearquivo = time().".".$imagem->getClientOriginalExtension();
+            $request->file('image')->move(public_path('./img/posts/'), $nomearquivo);
+        }
 
         $post->update([
             'title' => $request->title,
             'body' => $request->body,
+            'image' => $nomearquivo,
             'author' => Auth::user()->name
         ]);
 

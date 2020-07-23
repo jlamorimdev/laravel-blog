@@ -14,6 +14,7 @@
                             <tr>
                                 <th>Title</th>
                                 <th>Author</th>
+                                <th>Image</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -22,6 +23,7 @@
                                 <tr>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->author }}</td>
+                                    <td>{{ $post->image }}</td>
                                     <td>
                                         <a href="{{ url('posts/edit/' . $post->id) }}">edit</a>
                                         <a href="{{ url('posts/destroy/' . $post->id) }}">destroy</a>

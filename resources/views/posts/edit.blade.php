@@ -8,7 +8,7 @@
                     <div class="card-header">Posts Edit</div>
 
                     <div class="card-body">
-                        <form action="{{ url('posts/update/' . $post->id) }}" method="post">
+                        <form action="{{ url('posts/update/' . $post->id) }}" enctype="multipart/form-data" method="post">
                             {{ csrf_field() }}
                             <div class="form-group has-feedback{{ $errors->has('title') ? ' has-error' : '' }}">
                                 <label for="totle" class="text-muted">Title</label>
@@ -44,6 +44,15 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="form-group has-feedback{{ $errors->has('image') ? ' has-error' : '' }}">
+                            <label for="image" class="text-muted">Image</label>
+                            <input id="image" type="file" name="image" class="form-control-file"></input>
+                            @if ($errors->has('image'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('image') }}</strong>
+                            </span>
+                            @endif
+                        </div>
                             <button type="submit" class="btn btn-primary">update</button>
                         </form>
 
