@@ -23,7 +23,7 @@
                                 <tr>
                                     <td>{{ $post->title }}</td>
                                     <td>{{ $post->author }}</td>
-                                    <td>{{ $post->image }}</td>
+                                    <td><img src="{{url('img/posts/' .$post->image )}}" alt="Image" class="img-thumbnail"></td>
                                     <td>
                                         <a href="{{ url('posts/edit/' . $post->id) }}">edit</a>
                                         <a href="{{ url('posts/destroy/' . $post->id) }}">destroy</a>
