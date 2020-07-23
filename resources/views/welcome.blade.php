@@ -19,40 +19,7 @@
 
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">Rockbuzz Teste Full Stack Laravel</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Blog
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                @auth
-                    <li class="nav-item">
-                        <a href="{{ url('/home') }}" class="nav-link">Admin</a>
-                    </li>
-                    @else
-                        <li class="nav-item">
-                            <a href="{{ route('login') }}" class="nav-link">Login</a>
-                        </li>
 
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a href="{{ route('register') }}" class="nav-link">Register</a>
-                            </li>
-                        @endif
-                        @endauth
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- Page Content -->
 <div class="container">

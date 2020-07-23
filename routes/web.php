@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WebsiteController@index')->name('index');
+Route::get('post/{id}', 'WebsiteController@post')->name('post');;
+Route::get('tag/{id}', 'WebsiteController@tag')->name('tag');;
 
 Auth::routes();
 
