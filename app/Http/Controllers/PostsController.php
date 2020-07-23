@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -42,7 +43,7 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function salvar(Request $request)
-    {
+    {   
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required'
@@ -54,13 +55,17 @@ class PostsController extends Controller
         ]);
 
         $post = Post::where('title', $request->title)->get();
-
+        
         foreach ($request->tags as $tag) {
-            \DB::table('tag_post')->insert([
-                'tag_id' => $tag->id,
-                'post_id' => $post[0]->id
-            ]);
+            if(isset($tag))
+            {
+                DB::table('tag_post')->insert([
+                    'tag_id' => $tag,
+                    'post_id' => $post[0]->id
+                ]);
+            }
         }
+        
 
         return redirect('posts');
     }
