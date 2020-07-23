@@ -13,6 +13,7 @@
                             <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Author</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -20,6 +21,7 @@
                             @foreach($posts as $post)
                                 <tr>
                                     <td>{{ $post->title }}</td>
+                                    <td>{{ $post->author }}</td>
                                     <td>
                                         <a href="{{ url('posts/edit/' . $post->id) }}">edit</a>
                                         <a href="{{ url('posts/destroy/' . $post->id) }}">destroy</a>

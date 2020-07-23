@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
@@ -52,6 +53,8 @@ class PostsController extends Controller
         Post::create([
             'title' => $request->title,
             'body' => $request->body,
+            'author' => Auth::user()->name
+            
         ]);
 
         $post = Post::where('title', $request->title)->get();
@@ -102,6 +105,7 @@ class PostsController extends Controller
         $post->update([
             'title' => $request->title,
             'body' => $request->body,
+            'author' => Auth::user()->name
         ]);
 
         DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
