@@ -101,11 +101,7 @@ class PostsController extends Controller
      */
     public function deletar($id)
     {
-        $post = Post::find($id);
-
-        $post->delete();
-
-        DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
+        $this->postService->delete($id);
 
         return redirect('posts');
     }

@@ -68,8 +68,13 @@ class PostService
         ]);;
     }
 
-    public function get($request = null)
-    {
-        return Post::query();
+    public function delete($id)
+    {   
+        $post = Post::find($id);
+        $post->delete();
+
+        DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
+
+        return $post;
     }
 }
