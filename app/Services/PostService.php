@@ -21,6 +21,7 @@ class PostService
         $post = Post::create([
             'title' => $request->title,
             'body' => $request->body,
+            'slug' => $request->slug,
             'image' => $nomearquivo,
             'is_published' => $request->is_published,
             'author' => Auth::user()->name,
@@ -39,9 +40,9 @@ class PostService
         return $post;
     }
 
-    public function update($id, $request)
+    public function update($slug, $request)
     {
-        $post = Post::find($id);
+        $post = Post::where('slug', $slug)->first();
         $nomearquivo = $post->image;
 
         if ($request->hasFile('image')) {
@@ -64,14 +65,15 @@ class PostService
             'title' => $request->title,
             'body' => $request->body,
             'is_published' => $request->is_published,
+            'slug' => $request->slug,
             'image' => $nomearquivo,
             'author' => Auth::user()->name
         ]);;
     }
 
-    public function delete($id)
+    public function delete($slug)
     {
-        $post = Post::find($id);
+        $post = Post::where('slug', $slug)->first();
         $post->delete();
 
         DB::table('tag_post')->where('post_id', '=', $post->id)->delete();

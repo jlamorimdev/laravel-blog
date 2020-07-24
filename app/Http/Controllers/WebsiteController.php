@@ -15,8 +15,8 @@ class WebsiteController extends Controller
         return view('website.index', compact('tags', 'posts'));
     }
 
-    public function post($id){
-        $post = Post::where('id', $id)->first();
+    public function post($slug){
+        $post = Post::where('slug', $slug)->first();
         if($post){
             return view('website.post', compact('post'));
         }else{

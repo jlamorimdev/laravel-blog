@@ -43,8 +43,8 @@
                                 <td>{{ $post->author }}</td>
                                 <td><img src="{{url('img/posts/' .$post->image )}}" alt="Image" class="img-thumbnail"></td>
                                 <td>
-                                    <a href="{{ url('posts/edit/' . $post->id) }}" class="btn btn-sm btn-primary">edit</a>
-                                    <a href="{{ url('posts/destroy/' . $post->id) }}" class="btn btn-sm btn-danger">destroy</a>
+                                    <a href="{{ url('posts/edit/' . $post->slug) }}" class="btn btn-sm btn-primary">edit</a>
+                                    <a href="{{ url('posts/destroy/' . $post->slug) }}" class="btn btn-sm btn-danger">destroy</a>
                                 </td>
                             </tr>
                             @endforeach

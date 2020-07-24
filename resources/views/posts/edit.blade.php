@@ -8,10 +8,10 @@
                 <div class="card-header">Posts Edit</div>
 
                 <div class="card-body">
-                    <form action="{{route('posts.update', $post->id)}}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('posts.update', $post->slug)}}" enctype="multipart/form-data" method="post">
                         {{ csrf_field() }}
                         <div class="form-group has-feedback{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="totle" class="text-muted">Title</label>
+                            <label for="title" class="text-muted">Title</label>
                             <input id="title" type="text" value="{{ $post->title }}" name="title" class="form-control">
                             @if ($errors->has('title'))
                             <span class="help-block">
@@ -25,6 +25,15 @@
                             @if ($errors->has('body'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('body') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                        <div class="form-group has-feedback{{ $errors->has('slug') ? ' has-error' : '' }}">
+                            <label for="slug" class="text-muted">Slug</label>
+                            <input id="slug" type="text" value="{{ $post->slug }}" name="slug" class="form-control">
+                            @if ($errors->has('slug'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('slug') }}</strong>
                             </span>
                             @endif
                         </div>

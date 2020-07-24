@@ -67,9 +67,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editar($id)
+    public function editar($slug)
     {
-        $post = Post::find($id);
+        $post = Post::where('slug', $slug)->first();
 
         return view('posts.edit', compact('post'));
     }
@@ -78,10 +78,10 @@ class PostsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function atualizar(Request $request, $id)
+    public function atualizar(Request $request, $slug)
     {
         $this->validate($request, [
             'title' => 'required',
@@ -89,7 +89,7 @@ class PostsController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        if ($this->postService->update($id, $request)) {
+        if ($this->postService->update($slug, $request)) {
             return redirect('posts')->with('success', 'Post Atualizado com Sucesso');;
         } else {
             return redirect('posts')->with('danger', 'Ocorreu um erro ao Atualizar Post');;
@@ -102,9 +102,9 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function deletar($id)
+    public function deletar($slug)
     {
-        if ($this->postService->delete($id)) {
+        if ($this->postService->delete($slug)) {
             return redirect('posts')->with('success', 'Post Deletado com Sucesso');;
         } else {
             return redirect('posts')->with('danger', 'Ocorreu um erro ao Deletar Post');;
