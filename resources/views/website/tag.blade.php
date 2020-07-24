@@ -20,7 +20,7 @@
         <div class="col-lg-8 col-md-8 mx-auto">
           @foreach($posts as $post)
           <div class="post-preview">
-            <a href="{{ url('post/' . $post->id)}}">
+            <a href="{{ url('post/' . $post->slug)}}">
               <h2 class="post-title">
                 {{ $post->title }}
               </h2>
