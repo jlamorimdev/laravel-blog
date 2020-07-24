@@ -28,6 +28,18 @@
                             </span>
                             @endif
                         </div>
+                        <div class="form-group has-feedback{{ $errors->has('is_published') ? ' has-error' : '' }}">
+                            <label for="is_published" class="text-muted">Visibilidade</label>
+                            <select id="is_published" type="text" name="is_published" class="form-control">
+                                <option value="1">Público</option>
+                                <option value="0">Rascunho</option>
+                            </select>
+                            @if ($errors->has('is_published'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('is_published') }}</strong>
+                            </span>
+                            @endif
+                        </div>
                         <div class="form-group has-feedback{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="tags" class="text-muted">Tags</label>
                             <select id="tags" type="text" name="tags[]" multiple class="form-control">

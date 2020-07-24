@@ -30,7 +30,7 @@
           </h3>
         </a>
         <p class="post-meta">Posted by
-          <a href="#">{{ $post->author }}</a>
+        <b>{{ $post->author }}</b>
           on {{ date('M d Y', strtotime($post->created_at)) }}
           <span class="post-tag">
             Tag:

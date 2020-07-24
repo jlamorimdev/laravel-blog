@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterTablePostAddColumnStatusPublication extends Migration
+class AlterTablePostsAddColumnIsPublished extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AlterTablePostAddColumnStatusPublication extends Migration
      */
     public function up()
     {
-        //publication_status
-        if(!Schema::hasColumn('posts', 'publication_status')) {
+        if(!Schema::hasColumn('posts', 'is_published')) {
             Schema::table('posts', function (Blueprint $table) {
-                $table->string('publication_status')->nullable();
+                $table->integer('is_published')->default(1);
             });
         }
     }

@@ -21,6 +21,7 @@ class PostService
             'title' => $request->title,
             'body' => $request->body,
             'image' => $nomearquivo,
+            'is_published' => $request->is_published,
             'author' => Auth::user()->name,
             
         ]);
@@ -63,6 +64,7 @@ class PostService
         return  $post->update([
             'title' => $request->title,
             'body' => $request->body,
+            'is_published' => $request->is_published,
             'image' => $nomearquivo,
             'author' => Auth::user()->name
         ]);;

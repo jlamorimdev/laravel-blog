@@ -29,12 +29,17 @@
               </h3>
             </a>
             <p class="post-meta">Posted by
-              <a href="#">{{ $post->author }}</a>
-              on {{ date('M d Y', strtotime($post->created_at)) }}
-              <!-- <span class="post-tag">
-                Tag: <a href="">Laravel</a>
-              </span> -->
-            </p>
+          <b>{{ $post->author }}</b>
+          on {{ date('M d Y', strtotime($post->created_at)) }}
+          <span class="post-tag">
+            Tag:
+            @foreach(\App\Tag::all() as $tag)
+              @if($post->has_tag($tag->id))
+                <a href="{{ url('tag/' . $tag->id)}}">{{ $tag->name }}</a>
+              @endif
+            @endforeach
+          </span>
+        </p>
           </div>
           <hr>
           @endforeach
