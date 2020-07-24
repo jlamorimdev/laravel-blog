@@ -17,6 +17,10 @@ class CreatePostsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->string('body');
+            $table->string('author')->nullable();
+            $table->string('image')->nullable();
+            $table->integer('is_published')->default(1);
+            $table->string('slug')->unique();
             $table->timestamps();
         });
     }
