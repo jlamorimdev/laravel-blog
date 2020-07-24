@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
-use App\Http\Requests\PostRequest;
+use App\Http\Requests\PostRequestStore;
+use App\Http\Requests\PostRequestUpdate;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Services\PostService;
@@ -44,10 +45,10 @@ class PostsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\PostRequest $request
+     * @param  \App\Http\Requests\PostRequestStore $request
      * @return \Illuminate\Http\Response
      */
-    public function salvar(PostRequest $request)
+    public function salvar(PostRequestStore $request)
     {
         if ($this->postService->create($request)) {
             return redirect('posts')->with('success', 'Post Cadastrado com Sucesso');;
@@ -72,11 +73,11 @@ class PostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\PostRequest  $request
+     * @param  \App\Http\Requests\PostRequestUpdate  $request
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function atualizar(PostRequest $request, $slug)
+    public function atualizar(PostRequestUpdate $request, $slug)
     {
         if ($this->postService->update($slug, $request)) {
             return redirect('posts')->with('success', 'Post Atualizado com Sucesso');;
