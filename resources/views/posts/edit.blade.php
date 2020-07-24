@@ -8,7 +8,7 @@
                 <div class="card-header">Posts Edit</div>
 
                 <div class="card-body">
-                    <form action="{{ url('posts/update/' . $post->id) }}" enctype="multipart/form-data" method="post">
+                    <form action="{{route('posts.update', $post->id)}}" enctype="multipart/form-data" method="post">
                         {{ csrf_field() }}
                         <div class="form-group has-feedback{{ $errors->has('title') ? ' has-error' : '' }}">
                             <label for="totle" class="text-muted">Title</label>
@@ -62,6 +62,7 @@
                             </span>
                             @endif
                         </div>
+                        <a href="{{ route('posts.index') }}" class="btn btn-danger">Voltar</a>
                         <button type="submit" class="btn btn-primary">Update</button>
                     </form>
 

@@ -18,9 +18,9 @@ Route::get('tag/{id}', 'WebsiteController@tag')->name('tag');;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/posts', 'PostsController@listar');
+Route::get('/posts', 'PostsController@listar')->name('posts.index');
 Route::get('/posts/create', 'PostsController@criar');
-Route::post('/posts/store', 'PostsController@salvar');
+Route::post('/posts/store', 'PostsController@salvar')->name('posts.store');
 Route::get('/posts/edit/{id}', 'PostsController@editar');
-Route::post('/posts/update/{id}', 'PostsController@atualizar');
+Route::post('/posts/update/{id}', 'PostsController@atualizar')->name('posts.update');;
 Route::get('/posts/destroy/{id}', 'PostsController@deletar');
