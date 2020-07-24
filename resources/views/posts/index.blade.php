@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Posts
-                <a href="{{ url('posts/create') }}" class="btn btn-sm btn-primary float-right">Create</a>
+                    <a href="{{ url('posts/create') }}" class="btn btn-sm btn-primary float-right">Create</a>
                 </div>
 
                 <div class="card-body">
@@ -50,6 +50,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="clearfix mt-4">
+                        {{ $posts->links() }}
+                    </div>
                 </div>
             </div>
         </div>
