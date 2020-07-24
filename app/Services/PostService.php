@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Post;
@@ -11,9 +12,9 @@ class PostService
     {
         $nomearquivo = '';
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imagem = $request->file('image');
-            $nomearquivo = time().".".$imagem->getClientOriginalExtension();
+            $nomearquivo = time() . "." . $imagem->getClientOriginalExtension();
             $request->file('image')->move(public_path('./img/posts/'), $nomearquivo);
         }
 
@@ -23,12 +24,11 @@ class PostService
             'image' => $nomearquivo,
             'is_published' => $request->is_published,
             'author' => Auth::user()->name,
-            
+
         ]);
 
-        foreach ($request->tags as $tag) {
-            if(isset($tag))
-            {
+        if (isset($request->tags) || $request->tags != "") {
+            foreach ($request->tags as $tag) {
                 DB::table('tag_post')->insert([
                     'tag_id' => $tag,
                     'post_id' => $post->id
@@ -44,17 +44,16 @@ class PostService
         $post = Post::find($id);
         $nomearquivo = $post->image;
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $imagem = $request->file('image');
-            $nomearquivo = time().".".$imagem->getClientOriginalExtension();
+            $nomearquivo = time() . "." . $imagem->getClientOriginalExtension();
             $request->file('image')->move(public_path('./img/posts/'), $nomearquivo);
         }
 
         DB::table('tag_post')->where('post_id', '=', $post->id)->delete();
 
-        foreach ($request->tags as $tag) {
-            if(isset($tag))
-            {
+        if (isset($request->tags) || $request->tags != "") {
+            foreach ($request->tags as $tag) {
                 DB::table('tag_post')->insert([
                     'tag_id' => $tag,
                     'post_id' => $post->id
@@ -71,7 +70,7 @@ class PostService
     }
 
     public function delete($id)
-    {   
+    {
         $post = Post::find($id);
         $post->delete();
 
