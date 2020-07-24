@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Services\PostService;
 
 class PostsController extends Controller
-{   
+{
     private $postService;
 
     public function __construct(PostService $postService)
@@ -47,17 +47,18 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function salvar(Request $request)
-    {   
+    {
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-      $this->postService->create($request);
-        
-
-        return redirect('posts');
+        if ($this->postService->create($request)) {
+            return redirect('posts')->with('success', 'Post Cadastrado com Sucesso');;
+        } else {
+            return redirect('posts')->with('danger', 'Ocorreu um erro ao Cadastrar Post');;
+        }
     }
 
     /**
@@ -88,9 +89,11 @@ class PostsController extends Controller
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-       $this->postService->update($id, $request);
-
-        return redirect('posts');
+        if ($this->postService->update($id, $request)) {
+            return redirect('posts')->with('success', 'Post Atualizado com Sucesso');;
+        } else {
+            return redirect('posts')->with('danger', 'Ocorreu um erro ao Atualizar Post');;
+        }
     }
 
     /**
@@ -101,8 +104,10 @@ class PostsController extends Controller
      */
     public function deletar($id)
     {
-        $this->postService->delete($id);
-
-        return redirect('posts');
+        if ($this->postService->delete($id)) {
+            return redirect('posts')->with('success', 'Post Deletado com Sucesso');;
+        } else {
+            return redirect('posts')->with('danger', 'Ocorreu um erro ao Deletar Post');;
+        }
     }
 }

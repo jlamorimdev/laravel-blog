@@ -29,10 +29,10 @@
                             @endif
                         </div>
                         <div class="form-group has-feedback{{ $errors->has('is_published') ? ' has-error' : '' }}">
-                            <label for="is_published" class="text-muted">Visibilidade</label>
+                            <label for="is_published" class="text-muted">Publish</label>
                             <select id="is_published" type="text" name="is_published" class="form-control">
-                                <option value="1">Público</option>
-                                <option value="0">Rascunho</option>
+                                <option value="1">Publish</option>
+                                <option value="0">Draft</option>
                             </select>
                             @if ($errors->has('is_published'))
                             <span class="help-block">
@@ -62,7 +62,7 @@
                             </span>
                             @endif
                         </div>
-                        <button type="submit" class="btn btn-primary">store</button>
+                        <button type="submit" class="btn btn-primary">Store</button>
                     </form>
 
                 </div>
