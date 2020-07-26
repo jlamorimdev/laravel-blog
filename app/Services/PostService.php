@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Post;
 use DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class PostService
 {
@@ -18,10 +19,11 @@ class PostService
             $request->file('image')->move(public_path('./img/posts/'), $nomearquivo);
         }
 
+
         $post = Post::create([
             'title' => $request->title,
             'body' => $request->body,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->slug, '-'),
             'image' => $nomearquivo,
             'is_published' => $request->is_published,
             'author' => Auth::user()->name,
@@ -65,7 +67,7 @@ class PostService
             'title' => $request->title,
             'body' => $request->body,
             'is_published' => $request->is_published,
-            'slug' => $request->slug,
+            'slug' => Str::slug($request->slug, '-'),
             'image' => $nomearquivo,
             'author' => Auth::user()->name
         ]);;
