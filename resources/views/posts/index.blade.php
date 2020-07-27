@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+  
+<div id="app">
+  </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -25,34 +28,8 @@
 
                     </div>
                     @endif
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th style="width: 60px">#</th>
-                                <th>Title</th>
-                                <th style="width: 100px">Author</th>
-                                <th>Image</th>
-                                <th style="width: 130px">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($posts as $post)
-                            <tr>
-                                <td>{{ $post->id }}</td>
-                                <td>{{ $post->title }}</td>
-                                <td>{{ $post->author }}</td>
-                                <td><img src="{{url('img/posts/' .$post->image )}}" alt="Image" class="img-thumbnail"></td>
-                                <td>
-                                    <a href="{{ url('posts/edit/' . $post->slug) }}" class="btn btn-sm btn-primary">edit</a>
-                                    <a href="{{ url('posts/destroy/' . $post->slug) }}" class="btn btn-sm btn-danger">destroy</a>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                    <div class="clearfix mt-4">
-                        {{ $posts->links() }}
-                    </div>
+                    <post-list posts="{{ $posts }}"></post-list>
+                    
                 </div>
             </div>
         </div>

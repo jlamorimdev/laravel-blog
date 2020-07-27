@@ -511,7 +511,7 @@ mark,
   background-color: #f8fafc;
   border: 1px solid #dee2e6;
   border-radius: 0.25rem;
-  width: 125px;
+  max-width: 100%;
   height: auto;
 }
 

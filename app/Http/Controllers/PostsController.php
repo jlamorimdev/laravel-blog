@@ -27,7 +27,7 @@ class PostsController extends Controller
      */
     public function listar()
     {
-        $posts = Post::orderBy('id', 'DESC')->paginate(5);
+        $posts = Post::orderBy('id', 'DESC')->get();
 
         return view('posts.index', ['posts' => $posts]);
     }
