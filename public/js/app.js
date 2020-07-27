@@ -37507,6 +37507,13 @@ var render = function() {
           _c("td", [_vm._v(_vm._s(post.author))]),
           _vm._v(" "),
           _c("td", [
+            _c("img", {
+              staticClass: "img-thumbnail",
+              attrs: { src: "/img/posts/" + post.image, alt: "Image" }
+            })
+          ]),
+          _vm._v(" "),
+          _c("td", [
             _c(
               "a",
               {
@@ -37543,6 +37550,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Title")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Author")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { width: "100px" } }, [_vm._v("Image")]),
         _vm._v(" "),
         _c("th", { staticStyle: { width: "130px" } }, [_vm._v("Action")])
       ])
